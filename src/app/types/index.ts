@@ -44,5 +44,35 @@ type Cart = {
     __v: number;
   };
 };
+type CartMessage = Pick<Cart, "message">;
+type GetBasketResponse = {
+  cart: {
+    _id: string;
+    userId: string;
+    items: {
+      grocery: Product;
+      quantity: number;
+      price: number;
+      name: string;
+      _id: string;
+    }[];
+    totalAmount: number;
+    createdAt: string;
+    updatedAt: string;
+    __v: number;
+  };
+};
 
-export type { Product, GetProductsResponse, GetProductResponse, Cart };
+type CheckoutSingleItemResponse = {
+  url: string;
+};
+
+export type {
+  Product,
+  GetProductsResponse,
+  GetProductResponse,
+  Cart,
+  CheckoutSingleItemResponse,
+  GetBasketResponse,
+  CartMessage,
+};

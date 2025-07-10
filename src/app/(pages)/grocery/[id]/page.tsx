@@ -1,10 +1,10 @@
 import OrderButtons from "@/app/components/detail/orderButtons";
 import { getProduct } from "@/app/services/productsServices";
-import { Span } from "next/dist/trace";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { FaArrowLeft, FaLeaf, FaShoppingBasket } from "react-icons/fa";
-import { MdOutlineAddShoppingCart, MdOutlineLocalShipping } from "react-icons/md";
+import { MdOutlineLocalShipping } from "react-icons/md";
 import { TbWeight } from "react-icons/tb";
 
 type Props = {
@@ -14,6 +14,10 @@ type Props = {
 export default async function GroceryDetailPage({ params }: Props) {
   const { id } = await params;
   const { grocery } = await getProduct(id);
+
+  if (!grocery) {
+    notFound();
+  }
 
   const info = [
     {
@@ -81,7 +85,7 @@ export default async function GroceryDetailPage({ params }: Props) {
             </div>
 
             <div className="mt-4">
-              <p className="text-3xl font-bold text-green-600">{grocery.price} TL</p>
+              <p className="text-3xl font-bold text-green-600">{grocery.price} ₺</p>
               <p className="text-gray-500">KDV Dahil</p>
             </div>
             <div className="my-6 h-px bg-gray-200"></div>

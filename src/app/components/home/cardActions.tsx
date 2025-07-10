@@ -1,13 +1,13 @@
 "use client";
 
 import { addToBasket } from "@/app/services/basketService";
+import { userId } from "@/app/utils/constants";
 import { useState } from "react";
 import { FaPlus, FaSpinner } from "react-icons/fa";
 import { toast } from "react-toastify";
 
 export default function CardActions({ groceryId }: { groceryId: string }) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const userId = "zeki123"; // Real App: get user id from session
 
   const handleAddToCart = async () => {
     setIsLoading(true);
