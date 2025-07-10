@@ -17,7 +17,7 @@ export default function SuccessPage() {
           Please check your email for the order details
         </p>
         <Link
-          href="/orders"
+          href="/cart"
           className="border shadow py-2 px-5 rounded-lg text-lg hover:shadow-lg transition-all duration-300"
         >
           My Orders

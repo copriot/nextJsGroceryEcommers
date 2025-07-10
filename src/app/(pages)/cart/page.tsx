@@ -1,5 +1,7 @@
 import CartList from "@/app/components/cart/cartList";
+import CartSummary from "@/app/components/cart/cartSummary";
 import ClearBtn from "@/app/components/cart/clearBtn";
+import EmptyCard from "@/app/components/cart/emptyCard";
 import { getBasket } from "@/app/services/basketService";
 import { userId } from "@/app/utils/constants";
 
@@ -17,15 +19,19 @@ export default async function CartPage() {
               <h2 className="text-lg font-bold text-zinc-800">
                 Sepetinizdeki Ürünler({cart.items.length})
               </h2>
-              <ClearBtn />
+              {cart.items.length > 0 && <ClearBtn />}
             </div>
             <ul className="mt-5 divide-y divide-gray-300">
-              {cart.items.map((item) => (
-                <CartList key={item._id} item={item} />
-              ))}
+              {cart.items.length > 0 ? (
+                cart.items.map((item) => <CartList key={item._id} item={item} />)
+              ) : (
+                <EmptyCard />
+              )}
             </ul>
           </div>
         </div>
+
+        <CartSummary cart={cart} />
       </div>
     </div>
   );

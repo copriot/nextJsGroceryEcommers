@@ -47,6 +47,27 @@ const checkoutSingleItem = async (
   });
   return res.json();
 };
+
+//bütün seper için ödeme sayfası url'i oluştur
+const checkoutAllItems = async (userId: string): Promise<CheckoutSingleItemResponse> => {
+  const body = {
+    userId: userId,
+    customerInfo: {
+      name: "Zeki ÖZDEN",
+      phone: "05555555555",
+      deliveryAddress: "Ankara, Türkiye",
+      isDelivery: true,
+    },
+  };
+  const res = await fetch(`${BASE_URL}/api/checkout`, {
+    method: "POST",
+    body: JSON.stringify(body),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return res.json();
+};
 //kullanıcının sepetini getir
 const getBasket = async (userId: string): Promise<GetBasketResponse> => {
   const res = await fetch(`${BASE_URL}/api/cart?userId=${userId}`);
@@ -58,7 +79,7 @@ const updateCartItem = async (
   groceryId: string,
   quantity: number
 ): Promise<Cart> => {
-  const res = await fetch(`${BASE_URL}/api/cart/${groceryId}`, {
+  const res = await fetch(`${BASE_URL}/api/cart/item/`, {
     method: "PUT",
     body: JSON.stringify({ userId, groceryId, quantity }),
     headers: {
@@ -100,4 +121,5 @@ export {
   updateCartItem,
   removeCartItem,
   clearCart,
+  checkoutAllItems,
 };
