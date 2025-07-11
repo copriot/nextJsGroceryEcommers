@@ -12,7 +12,6 @@ export type CartItemProps = {
   };
 };
 export default function CartList({ item }: CartItemProps) {
-  console.log(item);
   return (
     <li className=" flex items-center py-4 px-2">
       <div className="overflow-hidden rounded-md mr-4">

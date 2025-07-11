@@ -2,18 +2,20 @@
 
 import { addToBasket } from "@/app/services/basketService";
 import { userId } from "@/app/utils/constants";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaPlus, FaSpinner } from "react-icons/fa";
 import { toast } from "react-toastify";
 
 export default function CardActions({ groceryId }: { groceryId: string }) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
+  const router = useRouter();
   const handleAddToCart = async () => {
     setIsLoading(true);
     const res = await addToBasket(userId, groceryId, 1)
       .then((res) => {
         toast.success(res.message);
+        router.refresh();
       })
       .catch((err) => {
         toast.error(err.message);
